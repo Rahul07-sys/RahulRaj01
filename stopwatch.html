@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            background-size: cover;
+        }
+
+        .overlay {
+
+            display: flex;
+            color: wheat;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-family: cursive;
+        }
+
+        .col {
+            width: 1000px;
+            align-items: center;
+            display: flex;
+            margin-top: 18%;
+            text-align: center;
+            justify-content: center;
+            color: rgb(232, 228, 220);
+        }
+
+        input {
+            height: 50px;
+            width: 70%;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .col div {
+            width: 250px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="overlay">
+            <div class="title">Stopwatch</div>
+            <div class="title" id="end-Date"></div>
+            <div class="col">
+
+                <div>
+                    <input type="text" readonly value="0"> <br>
+                    <label for="">Days</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0"> <br>
+                    <label for="">Hours</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0"> <br>
+                    <label for="">Minutes</label>
+                </div>
+                <div>
+                    <input type="text" readonly value="0"> <br>
+                    <label for="">Seconds</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const endDate = "20 April 2026 10:28:54 PM";
+
+
+
+        document.getElementById("end-Date").innerHTML = endDate;
+
+        const inputs = document.querySelectorAll("input");
+
+
+        const clock = () => {
+            const end = new Date(endDate);
+            const now = new Date();
+
+            const differ = (end - now) / 1000; // 1000 se divide hote hi seconds me convert ho gya;
+
+            if (differ < 0) return;
+            inputs[0].value = Math.floor(differ / 3600 / 24);
+            inputs[1].value = Math.floor(differ / 3600) % 24;
+            inputs[2].value = Math.floor(differ / 60) % 60;
+            inputs[3].value = Math.floor(differ) % 60;
+
+            // Convert into Days;
+            /* 
+            
+            * 1 day = 24 hrs
+            * 1 hr = 60 mins
+            * 60 min = 3600 sec
+            * 1 min = 60 sec
+            
+            */
+        }
+
+        clock()
+
+        setInterval(
+            () => {
+                clock()
+            },
+            1000
+        )
+    </script>
+</body>
+
+</html>
